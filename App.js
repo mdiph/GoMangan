@@ -1,10 +1,9 @@
-import { View, Text } from "react-native";
-import Home from "./screens/Home";
-import RestaurantDetail from "./screens/RestaurantDetail";
+import { View, Text } from 'react-native'
+import React from 'react'
+import RootNavigation from './navigation'
 
 export default function App() {
   return (
-    <RestaurantDetail/>
-  );
+    <RootNavigation/>
+  )
 }
- 
