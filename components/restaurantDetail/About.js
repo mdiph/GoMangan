@@ -2,16 +2,6 @@ import { View, Text, Image } from 'react-native'
 import React from 'react'
 
 
-const yelpRestaurantInfo = {
-    name : "Ayam Goreng Spesial Gunawan",
-    image: "https://awsimages.detik.net.id/community/media/visual/2021/04/22/5-makanan-enak-dari-indonesia-dan-malaysia-yang-terkenal-enak-5.jpeg?w=700&q=90",
-    price: "$$",
-    reviews: "200",
-    rating: 4.5,
-    categories: [{title: 'Indonesian'}, {title: 'Murah'}],
-};
-
-
 export default function About(props) {
     const {name, image, price, reviews, rating, categories} = props.route.params;
 
@@ -39,7 +29,7 @@ const RestaurantName = (props) => (
         marginHorizontal: 15,
         }}
     >
-        {props.title}
+        {props.name}
     </Text>
 );
 
