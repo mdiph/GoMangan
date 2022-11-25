@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import firebase from '../../firebase'
 
 
-export default function ViewCart() {
+export default function ViewCart({navigation}) {
 
     const [modalVisible, setModalVisible] = useState(false)
 
@@ -28,6 +28,7 @@ export default function ViewCart() {
             createdAt: firebase.firestore.FieldValue.serverTimestamp(),
           })
           setModalVisible(false)
+          navigation.navigate('OrderCompleted')
         }
 
     const styles = StyleSheet.create({
@@ -124,7 +125,7 @@ export default function ViewCart() {
             justifyContent: "center",
             flexDirection: "row",
             position: "absolute",
-            bottom: 200,
+            bottom: 1,
             zIndex: 999,
             
         }}>
