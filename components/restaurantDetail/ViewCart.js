@@ -1,7 +1,8 @@
 import { View, Text, TouchableOpacity, Modal, StyleSheet } from 'react-native'
 import React, {useState} from 'react'
 import { useSelector } from 'react-redux'
-import OrderItem from './OrderItem'
+import firebase from '../../firebase'
+
 
 export default function ViewCart() {
 
@@ -17,6 +18,17 @@ export default function ViewCart() {
         style: 'currency',
         currency: 'USD',
     })
+
+    const addOrderToFireBase = () => {
+        const db = firebase.firestore();
+        db.collection("orders")
+          .add({
+            items: items,
+            restaurantName: restaurantName,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          })
+          setModalVisible(false)
+        }
 
     const styles = StyleSheet.create({
         modalContainer: {
@@ -35,7 +47,7 @@ export default function ViewCart() {
         restaurantName: {
             textAlign: "center",
             fontWeight: "600",
-            fontSize: 18,
+            fontSize: 30,
             marginBottom: 10,
         },
 
@@ -48,7 +60,7 @@ export default function ViewCart() {
         subtotalText: {
             textAlign: "left",
             fontWeight: "600",
-            fontSize: 15,
+            fontSize: 20,
             marginBottom: 10,
         }
     })
@@ -56,11 +68,41 @@ export default function ViewCart() {
     const checkoutModalContent = () => {
         return (
             <>
-            <View style={styles.modalContainer}>
-                <View style= {styles.modalCheckoutContainer}>
-                    <Text style= {styles.restaurantName}>{restaurantName}</Text> 
+                <View style={styles.modalContainer}>
+                    <View style= {styles.modalCheckoutContainer}>
+                        <Text style= {styles.restaurantName}>{restaurantName}</Text> 
+                        
+                        <View style={styles.subtotalContainer}>
+                            <Text style ={styles.subtotalText}>Subtotal</Text>
+                            <Text style = {{fontSize:20}}>{totalUSD}</Text>
+                        </View>
+                        <View style={{flexDirection: 'row', justifyContent:'center'}}>
+                            <TouchableOpacity style={{
+                                marginTop: 20,
+                                backgroundColor: "black",
+                                alignItems: "center",
+                                padding: 13,
+                                borderRadius: 30,
+                                width: 300,
+                                position: "relative",
+                                }}
+                                onPress = {()=> {
+                                    addOrderToFireBase();
+                                }}
+                            >
+                                
+                                <Text style={{color: "white", fontSize: 20}}>Checkout</Text>
+                                <Text style={{
+                                    position: "absolute",
+                                    right: 20,
+                                    color: "white",
+                                    fontSize:15,
+                                    top: 17
+                                }}>{total ? totalUSD : ""}</Text>
+                            </TouchableOpacity>          
+                        </View>
+                    </View>
                 </View>
-            </View>
             </>
         )
     }
@@ -103,8 +145,8 @@ export default function ViewCart() {
                 }}
                 onPress ={() => setModalVisible(true)}
                 >
-                    <Text style={{color: "white", fontSize: 20,  marginRight: 70}}>Total Cart</Text>
-                    <Text style={{color: "white", fontSize:20, marginRight: 10}}>{totalUSD}</Text>
+                    <Text style={{color: "white", fontSize: 20,  marginRight: 90}}>Total Cart</Text>
+                    
                 </TouchableOpacity>
             </View>
         </View>
