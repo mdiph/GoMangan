@@ -1,5 +1,6 @@
-import { View, Text, Image, ScrollView } from 'react-native'
+import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
 
 const items = [
     {
@@ -33,6 +34,8 @@ const items = [
   ];
 
 export default function Categories() {
+  const navigation = useNavigation()
+
   return (
     <View style = {{
         marginTop: 5,
@@ -40,6 +43,7 @@ export default function Categories() {
         paddingVertical: 10,
         paddingLeft: 20,
     }}>
+      <TouchableOpacity activeOpacity={1} onPress ={() => navigation.navigate('CoffeNeeded')}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {items.map((item, index) => (
             <View key = {index} style={{alignItems: "center", marginRight: 30 }}>
@@ -55,6 +59,7 @@ export default function Categories() {
             </View>
             ))}
         </ScrollView>
+      </TouchableOpacity>
     </View>
   )
 }
