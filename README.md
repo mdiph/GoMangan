@@ -1,4 +1,5 @@
-# My Universal React Project
+# GoMangan
+Food Delivery App Made With React Native that implement the use of Google Places API and Yelp API
 
 <p>
   <!-- iOS -->
