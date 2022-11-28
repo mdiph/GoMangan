@@ -75,6 +75,11 @@ const RestaurantImage = (props) => (
     </>
 );
 
+
+
+
+
+
 const RestaurantInfo = (props) => (
     <View style = {{
         flexDirection: "row", 
